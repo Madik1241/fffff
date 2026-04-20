@@ -1,190 +1,93 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>CSS Animations</title>
+<title>Мой сайт</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+        background: linear-gradient(270deg, #ff6b6b, #5f27cd, #1dd1a1);
+        background-size: 600% 600%;
+        animation: gradientBG 10s ease infinite;
+    }
 
-/* 1. кнопка */
-.btn {
-  padding: 10px 20px;
-  background: blue;
-  color: white;
-  border: none;
-  transition: 0.3s;
-}
-.btn:hover {
-  background: green;
-  transform: scale(1.1);
-}
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
 
-/* 2. fade-in */
-.fade {
-  width: 100px;
-  height: 100px;
-  background: purple;
-  opacity: 0;
-  animation: fadeIn 1.5s forwards;
-}
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
+    h1 {
+        margin-top: 50px;
+    }
 
-/* 3. движение */
-.move {
-  width: 50px;
-  height: 50px;
-  background: red;
-  position: relative;
-  animation: move 2s infinite alternate ease-in-out;
-}
-@keyframes move {
-  from { left: 0; }
-  to { left: 200px; }
-}
+    button {
+        padding: 15px 25px;
+        margin: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-/* 4. прыжок */
-.ball {
-  width: 50px;
-  height: 50px;
-  background: orange;
-  border-radius: 50%;
-  animation: jump 1s infinite ease-in-out;
-}
-@keyframes jump {
-  50% { transform: translateY(-80px); }
-}
+    button:hover {
+        transform: scale(1.1);
+    }
 
-/* 5. loader */
-.loader {
-  width: 40px;
-  height: 40px;
-  border: 5px solid #ccc;
-  border-top: 5px solid blue;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* 6. pulse */
-.pulse {
-  padding: 10px 20px;
-  background: crimson;
-  color: white;
-  border: none;
-  animation: pulse 1s infinite;
-}
-@keyframes pulse {
-  50% { transform: scale(1.2); }
-}
-
-/* 7. меню */
-#menu {
-  display: none;
-}
-
-.menu {
-  position: fixed;
-  top: 0;
-  left: -200px;
-  width: 200px;
-  height: 100%;
-  background: black;
-  transition: 0.3s;
-}
-
-#menu:checked + label + .menu {
-  transform: translateX(200px);
-}
-
-/* 8. карточка */
-.card {
-  width: 150px;
-  padding: 20px;
-  background: #eee;
-  transition: 0.3s;
-}
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-/* 9. typing */
-.typing {
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid black;
-  animation: typing 3s steps(20) forwards;
-}
-@keyframes typing {
-  to { width: 180px; }
-}
-
-/* 10. dots */
-.dots span {
-  width: 10px;
-  height: 10px;
-  background: black;
-  display: inline-block;
-  margin: 5px;
-  border-radius: 50%;
-  animation: dots 0.6s infinite;
-}
-.dots span:nth-child(2) { animation-delay: 0.2s; }
-.dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes dots {
-  50% { transform: translateY(-10px); }
-}
+    .box {
+        margin-top: 30px;
+        width: 200px;
+        height: 200px;
+        background: white;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        transition: 0.5s;
+    }
 </style>
-
 </head>
 
 <body>
 
-<h3>1</h3>
-<button class="btn">Кнопка</button>
+<h1>🔥 Мой интерактивный сайт</h1>
 
-<h3>2</h3>
-<div class="fade"></div>
+<button onclick="changeColor()">Сменить цвет блока</button>
+<button onclick="rotateBox()">Крутить блок</button>
+<button onclick="changeBackground()">Сменить фон</button>
 
-<h3>3</h3>
-<div class="move"></div>
+<div class="box" id="box"></div>
 
-<h3>4</h3>
-<div class="ball"></div>
+<script>
+    function changeColor() {
+        const colors = ["red", "blue", "green", "yellow", "purple"];
+        let random = colors[Math.floor(Math.random() * colors.length)];
+        document.getElementById("box").style.background = random;
+    }
 
-<h3>5</h3>
-<div class="loader"></div>
+    function rotateBox() {
+        let box = document.getElementById("box");
+        box.style.transform = "rotate(360deg)";
+        setTimeout(() => {
+            box.style.transform = "rotate(0deg)";
+        }, 500);
+    }
 
-<h3>6</h3>
-<button class="pulse">Пульс</button>
-
-<h3>7</h3>
-<input type="checkbox" id="menu">
-<label for="menu">Меню</label>
-<div class="menu"></div>
-
-<h3>8</h3>
-<div class="card">Карточка</div>
-
-<h3>9</h3>
-<div class="typing">Привет мир</div>
-
-<h3>10</h3>
-<div class="dots">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+    function changeBackground() {
+        let colors = [
+            "linear-gradient(45deg, #ff9a9e, #fad0c4)",
+            "linear-gradient(45deg, #a18cd1, #fbc2eb)",
+            "linear-gradient(45deg, #f6d365, #fda085)",
+            "linear-gradient(45deg, #96fbc4, #f9f586)"
+        ];
+        let random = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.background = random;
+    }
+</script>
 
 </body>
 </html>
